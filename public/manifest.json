@@ -1,0 +1,41 @@
+{
+    "name": "SKSU Read Us",
+    "short_name": "Read Us",
+    "description": "Internet-Base Discussion Forum for Sultan Kudarat State University",
+    "display": "standalone",
+    "icons": [{
+            "src": "images/ReadUsLogo128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "images/ReadUsLogo144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "images/ReadUsLogo152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "images/ReadUsLogo192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "images/ReadUsLogo256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "images/ReadUsLogo512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "lang": "en-US",
+    "start_url": "/index.php",
+    "background_color": "#4F46E5",
+    "theme_color": "#4F46E5"
+}

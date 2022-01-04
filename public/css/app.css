@@ -2138,14 +2138,14 @@ select {
 .font-normal {
 	font-weight: 400;
 }
+.font-light {
+	font-weight: 300;
+}
 .font-extrabold {
 	font-weight: 800;
 }
 .font-bold {
 	font-weight: 700;
-}
-.font-light {
-	font-weight: 300;
 }
 .uppercase {
 	text-transform: uppercase;
@@ -2385,9 +2385,6 @@ select {
 }
 .duration-100 {
 	transition-duration: 100ms;
-}
-.duration-700 {
-	transition-duration: 700ms;
 }
 .ease-in-out {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

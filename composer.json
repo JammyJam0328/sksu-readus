@@ -9,16 +9,24 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "algolia/algoliasearch-client-php": "^3.2",
+        "beyondcode/laravel-websockets": "^1.12",
+        "blade-ui-kit/blade-ui-kit": "^0.3.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/psr7": "^1.5",
         "intervention/image": "^2.7",
         "ladumor/laravel-pwa": "^0.0.2",
         "laravel/framework": "^8.65",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
+        "laravel/scout": "^9.4",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
+        "league/commonmark": "^1.4",
         "livewire/livewire": "^2.5",
-        "nao-pon/flysystem-google-drive": "~1.1"
+        "nao-pon/flysystem-google-drive": "~1.1",
+        "pusher/pusher-php-server": "^5.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

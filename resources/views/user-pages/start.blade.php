@@ -34,7 +34,7 @@
         defer></script>
 </head>
 
-<body>
+<body class="text-gray-600">
     <div class="mb-10">
         <livewire:user.process.start-info />
 

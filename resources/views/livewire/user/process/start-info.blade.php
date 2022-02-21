@@ -85,7 +85,7 @@
                              </label>
 
                              <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                 <select wire:model.defer="user_type"
+                                 <select wire:model="user_type"
                                      name="iam"
                                      id="iam"
                                      class="max-w-lg block w-full uppercase shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
@@ -139,7 +139,9 @@
                                  @error('department')
                                      <span class="text-red-600 italic">{{ $message }}</span>
                                  @enderror
-
+                                 @if ($user_type != 'student' && $user_type != '')
+                                     <span class="text-gray-400 text-xs">Optional for {{ $user_type }}</span>
+                                 @endif
                              </div>
                          </div>
                          <div
@@ -161,6 +163,9 @@
                                  @error('course')
                                      <span class="text-red-600 italic">{{ $message }}</span>
                                  @enderror
+                                 @if ($user_type != 'student' && $user_type != '')
+                                     <span class="text-gray-400 text-xs">Optional for {{ $user_type }}</span>
+                                 @endif
                              </div>
                          </div>
                      </div>

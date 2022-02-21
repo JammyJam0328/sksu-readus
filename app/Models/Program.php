@@ -13,4 +13,8 @@ class Program extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    public function information()
+    {
+        return $this->hasOne(Information::class);
+    }
 }

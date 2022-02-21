@@ -1,5 +1,5 @@
 <div x-data="creatingPost">
-    <div class="border-b p-5">
+    <div class="border-b border-indigo-500 p-5">
         <div class="flex items-start space-x-4"
             x-on:notify.window="txtarea=''">
             <div class="min-w-0 flex-1">

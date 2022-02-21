@@ -300,7 +300,6 @@ class CampusDepartmentProgramSeeder extends Seeder
             'name' => 'Bachelor of Science in Agriculture'
         ]);
 
-
         $department = $campus->departments()->create([
             "name" => "College of Education"
         ]);

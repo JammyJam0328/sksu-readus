@@ -12,11 +12,9 @@ class PostList extends Component
     public function render()
     {
         return view('livewire.user.stateful.post-list',[
-            'posts' => $this->ready ? Post::where('visibility','all')->orWhere('visibility',auth()->user()->campus_id)->with(['user'=>function($query){
-                return $query->select('id','name','profile_photo_path');
-            },'medias'=>function($query){
+            'posts' => $this->ready==true ? Post::where('visibility','all')->orWhere('visibility',auth()->user()->campus_id)->with(['user','medias'=>function($query){
                 return $query->select('id','post_id','type','file_id');
-            }])->withCount('comments')->latest()->paginate($this->limit) : [],
+            }])->withCount('comments')->latest()->take($this->limit)->get() : [],
         ]);
     }
     public function initiate()
@@ -25,7 +23,8 @@ class PostList extends Component
     }
     public function loadMore()
     {
-        $this->limit += 10;
+        $this->limit = $this->limit + 10;
+        $this->ready=true;
     }
 
     public function postCreated()

@@ -43,7 +43,9 @@ class MediaContainer extends Component
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render()
-    {
+    {   
+        
         return view('components.shared.media-container');
     }
+
 }

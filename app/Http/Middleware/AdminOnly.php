@@ -16,6 +16,9 @@ class AdminOnly
      */
     public function handle(Request $request, Closure $next)
     {
+        if (auth()->user()->role!='admin') {
+            return redirect()->back();
+        }
         return $next($request);
     }
 }

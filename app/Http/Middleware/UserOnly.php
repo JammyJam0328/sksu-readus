@@ -16,8 +16,8 @@ class UserOnly
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->role="user") {
-            return redirect()->back();
+        if (auth()->user()->role!="user") {
+            return redirect('/dashboard');
         }
         if (auth()->user()->hasInfo==false) {
             return redirect('/setting-up');

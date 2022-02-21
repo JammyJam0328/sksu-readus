@@ -55,11 +55,14 @@ class StartInfo extends Component
         $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'middle_name' => 'required',
-            'course' => 'required|in:'. implode(',', $course_array),
+            'middle_name' => 'nullable',
+           
             'user_type' => 'required|in:student,teacher,office-admin',
+
+             'course' => $this->user_type=='student' ? 'required|in:'. implode(',', $course_array) : 'nullable|in:'. implode(',', $course_array) ,
+
             'campus' => 'required',
-            'department' => 'required',
+            'department' => $this->user_type=='student' ? 'required' : 'nullable',
         ]);
         
        auth()->user()->information()->create([
@@ -70,6 +73,7 @@ class StartInfo extends Component
        ]);
     
         auth()->user()->update([
+            'name'=>$this->first_name.' '.$this->last_name,
            'hasInfo' => true,
            'role_type' => $this->user_type,
            'campus_id' => $this->campus,

@@ -19,6 +19,7 @@ class InitialAccountSeeder extends Seeder
             'name'=>'Admin',
             'email'=>'admin@gmail.com',
             'password'=>bcrypt('admin12345'),
+            'hasInfo'=>true,
         ]);
         User::create([
             'role'=>'user',

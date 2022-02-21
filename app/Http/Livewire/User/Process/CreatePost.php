@@ -90,6 +90,7 @@ class CreatePost extends Component
             'privacies' => 'required',
         ]);
 
+    
            $post = Post::create([
             'user_id' => auth()->user()->id,
             'title' => $this->post_title,

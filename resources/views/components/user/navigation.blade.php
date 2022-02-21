@@ -1,10 +1,10 @@
-<nav class="space-y-1"
+<nav class="space-y-2"
     aria-label="Sidebar">
     <a href="{{ route('home') }}"
-        class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 flex items-center px-3 py-2 text-sm font-medium rounded-md"
+        class="{{ Request::routeIs('home')? 'text-indigo-600 font-extrabold hover:bg-gray-200': 'text-gray-600  hover:bg-indigo-500 hover:text-white' }}  flex items-center px-3 py-2  font-medium rounded-md transform transition ease-in-out duration-300"
         aria-current="page">
 
-        <svg class="text-gray-400 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+        <svg class="flex-shrink-0 w-6 h-6 mr-3 -ml-1 "
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -20,12 +20,10 @@
         </span>
     </a>
 
-
-
-    <a href="#"
-        class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 flex items-center px-3 py-2 text-sm font-medium rounded-md">
+    <a href="{{ route('announcements') }}"
+        class="{{ Request::routeIs('announcements')? 'text-indigo-600 font-extrabold hover:bg-gray-200': 'text-gray-600  hover:bg-indigo-500 hover:text-white' }}  flex items-center px-3 py-2  font-medium rounded-md transform transition ease-in-out duration-300">
         <svg xmlns="http://www.w3.org/2000/svg"
-            class="text-gray-400 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+            class="flex-shrink-0 w-6 h-6 mr-3 -ml-1 "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor">
@@ -38,14 +36,14 @@
             Announcements
         </span>
 
-        <span class="bg-gray-200 text-gray-600 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+        {{-- <span class="bg-gray-200 text-gray-600  ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
             19
-        </span>
+        </span> --}}
     </a>
 
-    <a href="#"
-        class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 flex items-center px-3 py-2 text-sm font-medium rounded-md">
-        <svg class="text-gray-400 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+    <a href="{{ route('events') }}"
+        class="{{ Request::routeIs('events')? 'text-indigo-600 font-extrabold hover:bg-gray-200': 'text-gray-600  hover:bg-indigo-500 hover:text-white' }}  flex items-center px-3 py-2  font-medium rounded-md transform transition ease-in-out duration-300">
+        <svg class="flex-shrink-0 w-6 h-6 mr-3 -ml-1 "
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -60,11 +58,35 @@
             Events
         </span>
 
-        <span class="bg-gray-200 text-gray-600 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+        {{-- <span class="bg-gray-200 text-gray-600  ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
             20+
-        </span>
+        </span> --}}
     </a>
 
+    <form method="POST"
+        action="{{ route('logout') }}">
+        @csrf
+        <a href="{{ route('logout') }}"
+            onclick="event.preventDefault();this.closest('form').submit();"
+            class="flex items-center px-3 py-2 font-medium text-gray-600 transition duration-300 ease-in-out transform rounded-md  hover:bg-indigo-500 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                class="flex-shrink-0 w-6 h-6 mr-3 -ml-1 "
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+
+            <span class="truncate">
+                Logout
+            </span>
+
+        </a>
+
+    </form>
 
 
 

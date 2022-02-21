@@ -1,29 +1,33 @@
-<div class="sticky top-0 z-50"
-    x-data="{atTop:window.pageYOffset || document.documentElement.scrollTop,searching:false}"
-    @scroll.window="atTop = window.pageYOffset || document.documentElement.scrollTop">
-    <div class="pl-4 pr-6 pt-2 pb-2 border-b   sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-2 xl:border-t-0 "
-        x-bind:class="atTop>0 ? 'bg-indigo-600 text-white' : '  text-indigo-600 bg-white'">
+<div class="sticky top-0 z-50">
+    <div class="pt-2 pb-2 pl-4 pr-6 border-b sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-2 xl:border-t-0 bg-indigo-500 text-white">
         <div class="w-full">
-            <div class="flex space-x-2 items-center">
-                <img class="h-9 w-10"
-                    src="{{ asset('images/ReadUsLogo128.png') }}"
-                    alt="logo">
-                <div class="w-full flex">
-                    <input type="text"
-                        x-on:focus="searching=true"
-                        x-on:blur="searching=false"
-                        name="search"
-                        id="search"
-                        class="ease-in-out shadow-sm text-indigo-600 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 px-4 rounded-full bg-gray-50"
-                        placeholder="Search">
+            <div class="flex items-center justify-between space-x-2">
+                <div class="flex space-x-2">
+                    <img class="w-10 h-9"
+                        src="{{ asset('images/ReadUsLogo128.png') }}"
+                        alt="logo">
                 </div>
-                <div class="flex space-x-2 items-center mt-1">
+                <div class="flex items-center space-x-2">
                     <div>
-                        <button x-show="searching==false"
-                            x-on:click="$dispatch('create-post')"
-                            class="rounded-full">
+                        <a href="{{ route('search') }}"
+                            class="mt-1 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-8 w-8 font-light md:font-bold  "
+                                class="w-8 h-8 font-light md:font-bold "
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div>
+                        <button x-on:click="$dispatch('create-post')"
+                            class="mt-1 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-8 h-8 font-light md:font-bold "
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -34,11 +38,12 @@
                             </svg>
                         </button>
                     </div>
-                    <div x-show="searching==false">
+                    <div>
                         <livewire:user.notification />
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

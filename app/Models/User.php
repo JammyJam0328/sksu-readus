@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+use Laravel\Scout\Searchable;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -17,6 +17,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +31,11 @@ class User extends Authenticatable
         'email',
         'password',
         'campus_id',
-        'provider_id',
+        'google_id',
+        'google_profile_photo',
+        'profile_photo_path',
+        'event_notification',
+        'announcement_notification',
     ];
 
     public function information()
@@ -76,6 +81,32 @@ class User extends Authenticatable
     {
         return $this->hasMany(View::class);
     }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        unset($array['created_at'], $array['updated_at'], $array['provider_id'], $array['role_type'], $array['remember_token']);
+
+        return $array;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+
 
     
 

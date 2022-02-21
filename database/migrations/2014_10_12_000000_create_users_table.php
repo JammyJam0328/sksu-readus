@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('role')->default('user');
             $table->string('role_type')->default('student');
             $table->boolean('hasInfo')->default(false);
-            $table->string('provider_id')->nullable();
+            $table->string('google_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->unsignedBigInteger('campus_id')->nullable();
@@ -27,6 +27,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('google_profile_photo')->nullable();
+            $table->boolean('event_notification')->default(false);
+            $table->boolean('announcement_notification')->default(false);
             $table->timestamps();
         });
     }

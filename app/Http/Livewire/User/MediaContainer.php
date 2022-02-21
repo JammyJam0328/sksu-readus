@@ -12,17 +12,14 @@ class MediaContainer extends Component
 
     public $imageLimit=0;
 
-    public $imageResponsiveSize;
+    public $imageResponsiveSize=[];
     public $lastImageToDisplay;
+
+    
 
     public function render()
     {
-          if (count($this->images)<4) {
-                $this->imageResponsiveSize=count($this->images);
-             }else{
-                $this->imageResponsiveSize='3';
-                $this->lastImageToDisplay = 4;
-            }
+         
         return view('livewire.user.media-container');
     }
 

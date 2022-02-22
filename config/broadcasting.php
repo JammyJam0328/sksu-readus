@@ -54,7 +54,7 @@ return [
                 'useTLS' => true,
                 'host' => 'readus.social',
                 'port' => 6001,
-                'scheme' => 'https'
+                'scheme' => 'http'
             ],
         ],
 

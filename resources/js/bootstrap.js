@@ -36,6 +36,8 @@ window.Echo = new Echo({
     key: "readUsAppKey",
     wsHost: window.location.hostname,
     wsPort: 6001,
+    wssHost: window.location.hostname,
+    wssPort: 6001,
     disableStats: true,
     enabledTransports: ["ws", "wss"],
 });

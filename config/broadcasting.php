@@ -52,7 +52,7 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
-                'host' => '159.223.76.230',
+                'host' => 'readus.social',
                 'port' => 6001,
                 'scheme' => 'http'
             ],

@@ -6487,9 +6487,10 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]((_Echo = {
   broadcaster: "pusher",
   key: "readUsAppKey",
+  cluster: "mt1",
   wsHost: window.location.hostname,
   wsPort: 6001
-}, _defineProperty(_Echo, "wsHost", 6001), _defineProperty(_Echo, "disableStats", true), _defineProperty(_Echo, "enabledTransports", ["ws", "wss"]), _Echo));
+}, _defineProperty(_Echo, "wsHost", 6001), _defineProperty(_Echo, "disableStats", true), _defineProperty(_Echo, "forceTLS", true), _defineProperty(_Echo, "enabledTransports", ["ws", "wss"]), _Echo));
 
 /***/ }),
 

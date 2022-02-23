@@ -52,7 +52,7 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
-                'encrypted' => false,
+                'encrypted' => true,
                 'host' => 'readus.com',
                 'port' => 6001,
                 'scheme' => 'https',

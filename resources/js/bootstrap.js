@@ -37,7 +37,7 @@ window.Echo = new Echo({
     cluster: "mt1",
     wsHost: window.location.hostname,
     wsPort: 6001,
-    wsHost: 6001,
+    wssHost: 6001,
     disableStats: true,
     forceTLS: true,
     enabledTransports: ["ws", "wss"],

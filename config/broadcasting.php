@@ -53,7 +53,7 @@ return [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
                 'encrypted' => false,
-                'host' => '127.0.0.1',
+                'host' => 'readus.com',
                 'port' => 6001,
                 'scheme' => 'https',
                 'curl_options' => [

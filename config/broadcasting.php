@@ -54,7 +54,11 @@ return [
                 'useTLS' => true,
                 'host' => 'readus.social',
                 'port' => 6001,
-                'scheme' => 'https'
+                'scheme' => 'https',
+                'curl_options' => [
+                    CURLOPT_SSL_VERIFYHOST => 0,
+                    CURLOPT_SSL_VERIFYPEER => 0,
+                ]
             ],
         ],
 

@@ -6453,6 +6453,10 @@ Object.defineProperty(HTMLMediaElement.prototype, "playing", {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+var _Echo;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -6480,14 +6484,12 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 // });
 // production
 
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]((_Echo = {
   broadcaster: "pusher",
   key: "readUsAppKey",
   wsHost: window.location.hostname,
-  wsPort: 6001,
-  disableStats: true,
-  enabledTransports: ["ws", "wss"]
-});
+  wsPort: 6001
+}, _defineProperty(_Echo, "wsHost", 6001), _defineProperty(_Echo, "disableStats", true), _defineProperty(_Echo, "enabledTransports", ["ws", "wss"]), _Echo));
 
 /***/ }),
 

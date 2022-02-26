@@ -9,7 +9,7 @@ use Laravel\Scout\Searchable;
 class Information extends Model
 {
     use HasFactory;
-    use searchable;
+    use Searchable;
     protected $guarded=[];
     public function user()
     {

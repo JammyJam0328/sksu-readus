@@ -52,7 +52,14 @@ class Post extends Model
         return $this->views()->count();
     }
 
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
 
+       unset($array['created_at'],$array['updated_at']);
+
+        return $array;
+    }
 
     
 

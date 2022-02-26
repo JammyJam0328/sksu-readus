@@ -11,7 +11,7 @@
                     </div>
                     <div class="flex items-center space-x-2">
                         <div>
-                            <a href="{{ route('algolia-search') }}"
+                            <a href="{{ route('search') }}"
                                 class="mt-1 rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="w-8 h-8 font-light md:font-bold "

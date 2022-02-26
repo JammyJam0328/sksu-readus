@@ -12,6 +12,7 @@ class SearchPage extends Component
     {
         return view('livewire.user.search-page',[
             'postResults'=>Post::search($this->searchTerm)->get(),
+            'userResults'=>User::search($this->searchTerm)->get()
         ]);
     }
     

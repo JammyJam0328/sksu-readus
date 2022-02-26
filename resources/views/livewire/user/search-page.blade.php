@@ -8,7 +8,7 @@
                         class="w-full h-10 px-5 pr-16 text-sm bg-gray-100 border-0 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-100"
                         type="search"
                         name="search"
-                        placeholder="Search for a user or posts"
+                        placeholder="Search "
                         autocomplete="search"
                         placeholder="Search">
                     <button type="button"
@@ -31,103 +31,94 @@
                     </button>
                 </div>
             </form>
-            {{-- <div>
-                <div class="px-2 border-b border-indigo-200">
-                    <nav class="flex -mb-px space-x-8"
-                        aria-label="Tabs">
-                        <!-- Current: "", Default: "" -->
-                        <button wire:click.prevent="$set('filter', 'user')"
-                            type="button"
-                            class="{{ $filter == 'user'? 'border-indigo-500 text-indigo-600': 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} px-1 py-2 text-sm font-medium border-b-2  whitespace-nowrap">
-                            User </button>
-                        <button wire:click.prevent="$set('filter', 'post')"
-                            type="button"
-                            class="{{ $filter == 'post'? 'border-indigo-500 text-indigo-600': 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} px-1 py-2 text-sm font-medium border-b-2  whitespace-nowrap">
-                            Post </button>
-                    </nav>
-                </div>
-            </div> --}}
+            <div>
+
+            </div>
         </div>
         <div class="divide-y-2 divide-gray-200">
-            {{-- @if ($filter == 'user' && $searchTerm != '')
-                <div class="p-2">
-                    <div class="py-1">
-                        <h1 class="text-lg text-gray-400">USERS</h1>
-                    </div>
-                    <ul role="list"
-                        class="divide-y divide-gray-200">
-                        @forelse ($userResults as $key => $user)
-                            <li wire:key="{{ $key }}-user-{{ $key }}"
-                                class="flex py-4">
-                                @if ($user->google_id)
-                                    <img class="w-10 h-10 rounded-full"
-                                        src="{{ $user->profile_photo_path == '' ? $user->google_profile_photo : $user->profile_photo_url }}"
-                                        alt="">
-                                @else
-                                    @php
-                                        $tempPhoto = 'https://ui-avatars.com/api/?name=' . $user->name . '&size=128&background=EBF4FF&color=7F9CF5';
-                                    @endphp
-                                    <img class="w-10 h-10 rounded-full"
-                                        src="{{ $tempPhoto }}"
-                                        alt="">
-                                @endif
+            <div>
+                @if ($searchTerm != '')
+                    <div class="p-2">
+                        <div class="py-1">
+                            <h1 class="text-lg text-gray-400">USERS</h1>
+                        </div>
+                        <ul role="list"
+                            class="divide-y divide-gray-200">
+                            @forelse ($userResults as $key => $user)
+                                <li wire:key="{{ $key }}-user-{{ $key }}"
+                                    class="flex py-4">
+                                    @if ($user->google_id)
+                                        <img class="w-10 h-10 rounded-full"
+                                            src="{{ $user->profile_photo_path == '' ? $user->google_profile_photo : $user->profile_photo_url }}"
+                                            alt="">
+                                    @else
+                                        @php
+                                            $tempPhoto = 'https://ui-avatars.com/api/?name=' . $user->name . '&size=128&background=EBF4FF&color=7F9CF5';
+                                        @endphp
+                                        <img class="w-10 h-10 rounded-full"
+                                            src="{{ $tempPhoto }}"
+                                            alt="">
+                                    @endif
 
-                                <div class="ml-3">
-                                    <a href="{{ route('user-profile', [
-                                        'email' => $user->email,
-                                        'id' => \Crypt::encrypt($user->id),
-                                    ]) }}"
-                                        class="text-sm font-medium text-gray-900 underline">{{ $user->name }}</a>
-                                    <p class="text-sm text-gray-500">{{ $user->email }}</p>
-                                </div>
-                            </li>
-                        @empty
-                            <li class="py-4">
-                                <p class="text-sm text-gray-500">No users found</p>
-                            </li>
-                        @endforelse
-                    </ul>
-                </div>
-            @endif --}}
-            @if ($searchTerm != '')
-                <div class="p-2">
-                    <div class="py-1">
-                        <h1 class="text-lg text-gray-400">POSTS</h1>
-                    </div>
-                    <ul role="list"
-                        class="divide-y divide-gray-200">
-                        @forelse ($postResults as $key => $post)
-                            <li wire:key="{{ $key }}-post-{{ $key }}"
-                                class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                <div class="flex justify-between space-x-3">
-                                    <div class="flex-1 min-w-0">
-                                        <a href="{{ route('view-post', [
-                                            'post_id' => \Crypt::encrypt($post->id),
+                                    <div class="ml-3">
+                                        <a href="{{ route('user-profile', [
+                                            'email' => $user->email,
+                                            'id' => \Crypt::encrypt($user->id),
                                         ]) }}"
-                                            class="block focus:outline-none">
-                                            <span class="absolute inset-0"
-                                                aria-hidden="true"></span>
-                                            <p class="text-sm font-medium text-gray-900 underline truncate">
-                                                {{ $post->title }}
-                                            </p>
-                                        </a>
+                                            class="text-sm font-medium text-gray-900 underline">{{ $user->name }}</a>
+                                        <p class="text-sm text-gray-500">{{ $user->email }}</p>
                                     </div>
-                                </div>
-                                <div class="mt-1">
-                                    <p class="text-sm text-gray-600 line-clamp-2">
-                                        {{ \Illuminate\Support\Str::limit($post->body, 100) }}
-                                    </p>
-                                </div>
-                            </li>
-                        @empty
-                            <li class="py-4">
-                                <p class="text-sm text-gray-500">No posts found</p>
-                            </li>
-                        @endforelse
-                    </ul>
+                                </li>
+                            @empty
+                                <li class="py-4">
+                                    <p class="text-sm text-gray-500">No users found</p>
+                                </li>
+                            @endforelse
+                        </ul>
+                    </div>
+                @endif
+            </div>
+            <div>
+                @if ($searchTerm != '')
+                    <div class="p-2">
+                        <div class="py-1">
+                            <h1 class="text-lg text-gray-400">POSTS</h1>
+                        </div>
+                        <ul role="list"
+                            class="divide-y divide-gray-200">
+                            @forelse ($postResults as $key => $post)
+                                <li wire:key="{{ $key }}-post-{{ $key }}"
+                                    class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                                    <div class="flex justify-between space-x-3">
+                                        <div class="flex-1 min-w-0">
+                                            <a href="{{ route('view-post', [
+                                                'post_id' => \Crypt::encrypt($post->id),
+                                            ]) }}"
+                                                class="block focus:outline-none">
+                                                <span class="absolute inset-0"
+                                                    aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900 underline truncate">
+                                                    {{ $post->title }}
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1">
+                                        <p class="text-sm text-gray-600 line-clamp-2">
+                                            {{ \Illuminate\Support\Str::limit($post->body, 100) }}
+                                        </p>
+                                    </div>
+                                </li>
+                            @empty
+                                <li class="py-4">
+                                    <p class="text-sm text-gray-500">No posts found</p>
+                                </li>
+                            @endforelse
+                        </ul>
 
-                </div>
-            @endif
+                    </div>
+                @endif
+            </div>
         </div>
         <div wire:loading.flex
             wire:target="searchTerm"

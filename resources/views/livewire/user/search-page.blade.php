@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <div class="flex-1 p-3 space-y-4 ">
         <div>
             <form class="relative pt-2 mx-auto text-gray-600">
@@ -31,7 +31,6 @@
             </form>
         </div>
         <div class="divide-y-2 divide-gray-200">
-            {{-- users --}}
             <div class="p-2">
                 <div class="py-1">
                     <h1 class="text-lg text-gray-400">USERS</h1>
@@ -109,4 +108,10 @@
         </div>
     </div>
 
+</div> --}}
+
+
+{{--  --}}
+<div>
+    under maintenance
 </div>

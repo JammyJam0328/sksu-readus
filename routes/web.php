@@ -57,13 +57,10 @@ Route::middleware(['auth:sanctum', 'verified','users'])->group(function () {
 
     Route::get('/notifications',[UserController::class,'notification'])->name('notification');
     
-    Route::get('/fulltext/search',function(){
+    Route::get('/search',function(){
         return view('user-pages.search');
     })->name('search');
 
-    Route::get('/full-search',function(){
-        return view('user-pages.algolia-search');
-    })->name('algolia-search');
 
 });
 // admin routes

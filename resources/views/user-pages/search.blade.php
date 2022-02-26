@@ -32,6 +32,6 @@
 @endsection
 @section('main')
     <div>
-        Hello
+        <livewire:user.search-page />
     </div>
 @endsection

@@ -31,7 +31,7 @@
                     </button>
                 </div>
             </form>
-            <div>
+            {{-- <div>
                 <div class="px-2 border-b border-indigo-200">
                     <nav class="flex -mb-px space-x-8"
                         aria-label="Tabs">
@@ -46,10 +46,10 @@
                             Post </button>
                     </nav>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="divide-y-2 divide-gray-200">
-            @if ($filter == 'user' && $searchTerm != '')
+            {{-- @if ($filter == 'user' && $searchTerm != '')
                 <div class="p-2">
                     <div class="py-1">
                         <h1 class="text-lg text-gray-400">USERS</h1>
@@ -88,8 +88,8 @@
                         @endforelse
                     </ul>
                 </div>
-            @endif
-            @if ($filter == 'post' && $searchTerm != '')
+            @endif --}}
+            @if ($searchTerm != '')
                 <div class="p-2">
                     <div class="py-1">
                         <h1 class="text-lg text-gray-400">POSTS</h1>
@@ -132,7 +132,6 @@
         <div wire:loading.flex
             wire:target="searchTerm"
             class="flex items-center justify-center">
-
             <h1 class="text-2xl text-gray-400">
                 Searching . . .
             </h1>

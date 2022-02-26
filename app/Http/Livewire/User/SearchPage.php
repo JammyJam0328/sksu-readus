@@ -5,7 +5,7 @@ namespace App\Http\Livewire\User;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Post;
- ;
+use App\Search\Fullsearch;
 class SearchPage extends Component
 {
     public $searchTerm='';
@@ -20,7 +20,7 @@ class SearchPage extends Component
     {
         if($this->searchTerm!='')
         {
-            $result = \App\Search\Fullsearch::search($this->searchTerm)->get();
+            $result = Fullsearch::search($this->searchTerm)->get();
                 // store all result that get_class($result) == 'App\Models\User' to $userResults
                 $this->userResults = $result->filter(function($result){
                     return get_class($result) == 'App\Models\User';

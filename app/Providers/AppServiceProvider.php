@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Providers;
+use App\Search\Fullsearch;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use App\Search\Fullsearch;
 class AppServiceProvider extends ServiceProvider
 {
     /**

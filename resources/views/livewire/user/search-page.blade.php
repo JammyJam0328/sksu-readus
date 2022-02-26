@@ -32,77 +32,72 @@
         </div>
         <div class="divide-y-2 divide-gray-200">
             {{-- users --}}
-            @if (count($userResults) > 0)
-                <div class="p-2">
-                    <div class="py-1">
-                        <h1 class="text-lg text-gray-400">USERS</h1>
-                    </div>
-                    <ul role="list"
-                        class="divide-y divide-gray-200">
-                        @foreach ($userResults as $key => $user)
-                            <li wire:key="{{ $key }}-user-{{ $key }}"
-                                class="flex py-4">
-                                @if ($user->google_id)
-                                    <img class="w-10 h-10 rounded-full"
-                                        src="{{ $user->profile_photo_path == '' ? $user->google_profile_photo : $user->profile_photo_url }}"
-                                        alt="">
-                                @else
-                                    @php
-                                        $tempPhoto = 'https://ui-avatars.com/api/?name=' . $user->name . '&size=128&background=EBF4FF&color=7F9CF5';
-                                    @endphp
-                                    <img class="w-10 h-10 rounded-full"
-                                        src="{{ $tempPhoto }}"
-                                        alt="">
-                                @endif
+            <div class="p-2">
+                <div class="py-1">
+                    <h1 class="text-lg text-gray-400">USERS</h1>
+                </div>
+                <ul role="list"
+                    class="divide-y divide-gray-200">
+                    @foreach ($userResults as $key => $user)
+                        <li wire:key="{{ $key }}-user-{{ $key }}"
+                            class="flex py-4">
+                            @if ($user->google_id)
+                                <img class="w-10 h-10 rounded-full"
+                                    src="{{ $user->profile_photo_path == '' ? $user->google_profile_photo : $user->profile_photo_url }}"
+                                    alt="">
+                            @else
+                                @php
+                                    $tempPhoto = 'https://ui-avatars.com/api/?name=' . $user->name . '&size=128&background=EBF4FF&color=7F9CF5';
+                                @endphp
+                                <img class="w-10 h-10 rounded-full"
+                                    src="{{ $tempPhoto }}"
+                                    alt="">
+                            @endif
 
-                                <div class="ml-3">
-                                    <a href="{{ route('user-profile', [
-                                        'email' => $user->email,
-                                        'id' => \Crypt::encrypt($user->id),
+                            <div class="ml-3">
+                                <a href="{{ route('user-profile', [
+                                    'email' => $user->email,
+                                    'id' => \Crypt::encrypt($user->id),
+                                ]) }}"
+                                    class="text-sm font-medium text-gray-900 underline">{{ $user->name }}</a>
+                                <p class="text-sm text-gray-500">{{ $user->email }}</p>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="p-2">
+                <div class="py-1">
+                    <h1 class="text-lg text-gray-400">POSTS</h1>
+                </div>
+                <ul role="list"
+                    class="divide-y divide-gray-200">
+                    @foreach ($postResults as $key => $post)
+                        <li wire:key="{{ $key }}-post-{{ $key }}"
+                            class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                            <div class="flex justify-between space-x-3">
+                                <div class="flex-1 min-w-0">
+                                    <a href="{{ route('view-post', [
+                                        'post_id' => \Crypt::encrypt($post->id),
                                     ]) }}"
-                                        class="text-sm font-medium text-gray-900 underline">{{ $user->name }}</a>
-                                    <p class="text-sm text-gray-500">{{ $user->email }}</p>
+                                        class="block focus:outline-none">
+                                        <span class="absolute inset-0"
+                                            aria-hidden="true"></span>
+                                        <p class="text-sm font-medium text-gray-900 underline truncate">
+                                            {{ $post->title }}
+                                        </p>
+                                    </a>
                                 </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @if (count($postResults) > 0)
-                <div class="p-2">
-                    <div class="py-1">
-                        <h1 class="text-lg text-gray-400">POSTS</h1>
-                    </div>
-                    <ul role="list"
-                        class="divide-y divide-gray-200">
-                        @foreach ($postResults as $key => $post)
-                            <li wire:key="{{ $key }}-post-{{ $key }}"
-                                class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                <div class="flex justify-between space-x-3">
-                                    <div class="flex-1 min-w-0">
-                                        <a href="{{ route('view-post', [
-                                            'post_id' => \Crypt::encrypt($post->id),
-                                        ]) }}"
-                                            class="block focus:outline-none">
-                                            <span class="absolute inset-0"
-                                                aria-hidden="true"></span>
-                                            <p class="text-sm font-medium text-gray-900 underline truncate">
-                                                {{ $post->title }}
-                                            </p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="mt-1">
-                                    <p class="text-sm text-gray-600 line-clamp-2">
-                                        {{ \Illuminate\Support\Str::limit($post->body, 100) }}
-                                    </p>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-
-                </div>
-            @endif
+                            </div>
+                            <div class="mt-1">
+                                <p class="text-sm text-gray-600 line-clamp-2">
+                                    {{ \Illuminate\Support\Str::limit($post->body, 100) }}
+                                </p>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
         <div wire:loading.flex
             wire:target="searchTerm"

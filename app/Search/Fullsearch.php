@@ -15,6 +15,12 @@ class Fullsearch extends Aggregator
         \App\Models\User::class,
         \App\Models\Post::class,
     ];
-
+  public function shouldBeSearchable()
+    {
+        // Check if the class uses the Searchable trait before calling shouldBeSearchable
+        if (array_key_exists(Searchable::class, class_uses($this->model))) {
+            return $this->model->shouldBeSearchable();
+        }
+    }
   
 }

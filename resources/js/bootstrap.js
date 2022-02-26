@@ -27,7 +27,6 @@ window.Pusher = require("pusher-js");
 //     wsPort: 6001,
 //     forceTLS: false,
 //     disableStats: true,
-//     enabledTransports: ["ws", "wss"],
 // });
 
 // production

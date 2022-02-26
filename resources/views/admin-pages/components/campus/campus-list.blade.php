@@ -12,10 +12,6 @@
                                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
                                  Deparments</th>
 
-                             <th scope="col"
-                                 class="relative px-6 py-3">
-                                 <span class="sr-only">Edit</span>
-                             </th>
                          </tr>
                      </thead>
                      <tbody>
@@ -26,10 +22,7 @@
                                      {{ $campus->name }}</td>
                                  <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                                      {{ $campus->departments_count }}</td>
-                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                     <a href="#"
-                                         class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                 </td>
+
                              </tr>
                          @endforeach
                      </tbody>

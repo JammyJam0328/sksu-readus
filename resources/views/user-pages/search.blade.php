@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('top-nav')
     <div class="sticky top-0 z-50">
-        <div class="pt-2 pb-2 pl-4 pr-6 border-b sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-2 xl:border-t-0 bg-indigo-600 text-white">
+        <div class="pt-2 pb-2 pl-4 pr-6 text-white bg-indigo-600 border-b sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-2 xl:border-t-0">
             <div class="w-full">
                 <div class="flex items-center justify-between space-x-2">
                     <div class="flex items-center justify-start w-full px-2 py-2 md:px-0">
@@ -32,6 +32,6 @@
 @endsection
 @section('main')
     <div>
-        <livewire:user.search-page />
+        Hello
     </div>
 @endsection

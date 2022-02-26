@@ -5,12 +5,12 @@ namespace App\Http\Livewire\User;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Post;
-use App\Search\Fullsearch;
 class SearchPage extends Component
 {
     public $searchTerm='';
     public $userResults=[];
     public $postResults=[];
+    public $filter='user';
     public function render()
     {
         return view('livewire.user.search-page');
@@ -18,18 +18,40 @@ class SearchPage extends Component
     
     public function updatedSearchTerm()
     {
-        if($this->searchTerm!='')
-        {
-            $result = Fullsearch::search($this->searchTerm)->get();
-                // store all result that get_class($result) == 'App\Models\User' to $userResults
-                $this->userResults = $result->filter(function($result){
-                    return get_class($result) == 'App\Models\User';
-                });
+        if($this->searchTerm!=""){
+            switch ($this->filter) {
+                case 'user':
+                    $this->userResults=User::search($this->searchTerm)->get();
+                    break;
+                case 'post':
+                    $this->postResults=Post::search($this->searchTerm)->get();
+                    break;
+                default:
+                        $this->userResults=[];
+                        $this->postResults=[];
+                    break;
+            }
+        }else{
+            $this->userResults=[];
+            $this->postResults=[];
+        }
+    }
 
-                // store all result that get_class($result) == 'App\Models\Post' to $postResults
-                $this->postResults = $result->filter(function($result){
-                    return get_class($result) == 'App\Models\Post';
-                });
+    public function updatedFilter()
+    {
+       if($this->searchTerm!=""){
+            switch ($this->filter) {
+                case 'user':
+                    $this->userResults=User::search($this->searchTerm)->get();
+                    break;
+                case 'post':
+                    $this->postResults=Post::search($this->searchTerm)->get();
+                    break;
+                default:
+                        $this->userResults=[];
+                        $this->postResults=[];
+                    break;
+            }
         }else{
             $this->userResults=[];
             $this->postResults=[];

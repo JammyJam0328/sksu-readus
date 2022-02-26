@@ -3,43 +3,60 @@
         <div>
             <form class="relative pt-2 mx-auto text-gray-600">
                 @csrf
-                <input wire:model.debounce.500ms="searchTerm"
-                    class="w-full h-10 px-5 pr-16 text-sm bg-gray-100 border-0 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-100"
-                    type="search"
-                    name="search"
-                    placeholder="Search for a user or posts"
-                    autocomplete="search"
-                    placeholder="Search">
-                <button type="button"
-                    class="absolute top-0 right-0 mt-5 mr-4">
-                    <svg class="w-4 h-4 text-gray-400 fill-current"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        version="1.1"
-                        id="Capa_1"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 56.966 56.966"
-                        style="enable-background:new 0 0 56.966 56.966;"
-                        xml:space="preserve"
-                        width="512px"
-                        height="512px">
-                        <path
-                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                    </svg>
-                </button>
+                <div>
+                    <input wire:model.debounce.500ms="searchTerm"
+                        class="w-full h-10 px-5 pr-16 text-sm bg-gray-100 border-0 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-100"
+                        type="search"
+                        name="search"
+                        placeholder="Search for a user or posts"
+                        autocomplete="search"
+                        placeholder="Search">
+                    <button type="button"
+                        class="absolute top-0 right-0 mt-5 mr-4">
+                        <svg class="w-4 h-4 text-gray-400 fill-current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            version="1.1"
+                            id="Capa_1"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 56.966 56.966"
+                            style="enable-background:new 0 0 56.966 56.966;"
+                            xml:space="preserve"
+                            width="512px"
+                            height="512px">
+                            <path
+                                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                        </svg>
+                    </button>
+                </div>
             </form>
+            <div>
+                <div class="px-2 border-b border-indigo-200">
+                    <nav class="flex -mb-px space-x-8"
+                        aria-label="Tabs">
+                        <!-- Current: "", Default: "" -->
+                        <button wire:click.prevent="$set('filter', 'user')"
+                            type="button"
+                            class="{{ $filter == 'user'? 'border-indigo-500 text-indigo-600': 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} px-1 py-2 text-sm font-medium border-b-2  whitespace-nowrap">
+                            User </button>
+                        <button wire:click.prevent="$set('filter', 'post')"
+                            type="button"
+                            class="{{ $filter == 'post'? 'border-indigo-500 text-indigo-600': 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} px-1 py-2 text-sm font-medium border-b-2  whitespace-nowrap">
+                            Post </button>
+                    </nav>
+                </div>
+            </div>
         </div>
         <div class="divide-y-2 divide-gray-200">
-            {{-- users --}}
-            @if (count($userResults) > 0)
+            @if ($filter == 'user' && $searchTerm != '')
                 <div class="p-2">
                     <div class="py-1">
                         <h1 class="text-lg text-gray-400">USERS</h1>
                     </div>
                     <ul role="list"
                         class="divide-y divide-gray-200">
-                        @foreach ($userResults as $key => $user)
+                        @forelse ($userResults as $key => $user)
                             <li wire:key="{{ $key }}-user-{{ $key }}"
                                 class="flex py-4">
                                 @if ($user->google_id)
@@ -64,18 +81,22 @@
                                     <p class="text-sm text-gray-500">{{ $user->email }}</p>
                                 </div>
                             </li>
-                        @endforeach
+                        @empty
+                            <li class="py-4">
+                                <p class="text-sm text-gray-500">No users found</p>
+                            </li>
+                        @endforelse
                     </ul>
                 </div>
             @endif
-            @if (count($postResults) > 0)
+            @if ($filter == 'post' && $searchTerm != '')
                 <div class="p-2">
                     <div class="py-1">
                         <h1 class="text-lg text-gray-400">POSTS</h1>
                     </div>
                     <ul role="list"
                         class="divide-y divide-gray-200">
-                        @foreach ($postResults as $key => $post)
+                        @forelse ($postResults as $key => $post)
                             <li wire:key="{{ $key }}-post-{{ $key }}"
                                 class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
                                 <div class="flex justify-between space-x-3">
@@ -98,7 +119,11 @@
                                     </p>
                                 </div>
                             </li>
-                        @endforeach
+                        @empty
+                            <li class="py-4">
+                                <p class="text-sm text-gray-500">No posts found</p>
+                            </li>
+                        @endforelse
                     </ul>
 
                 </div>

@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "algolia/algoliasearch-client-php": "^3.2",
+        "algolia/scout-extended": "^2.0",
         "beyondcode/laravel-websockets": "^1.12",
         "blade-ui-kit/blade-ui-kit": "^0.3.2",
         "fruitcake/laravel-cors": "^2.0",

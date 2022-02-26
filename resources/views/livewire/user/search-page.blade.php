@@ -40,48 +40,6 @@
                 @if ($searchTerm != '')
                     <div class="p-2">
                         <div class="py-1">
-                            <h1 class="text-lg text-gray-400">USERS</h1>
-                        </div>
-                        <ul role="list"
-                            class="divide-y divide-gray-200">
-                            @forelse ($userResults as $key => $user)
-                                <li wire:key="{{ $key }}-user-{{ $key }}"
-                                    class="flex py-4">
-                                    @if ($user->google_id)
-                                        <img class="w-10 h-10 rounded-full"
-                                            src="{{ $user->profile_photo_path == '' ? $user->google_profile_photo : $user->profile_photo_url }}"
-                                            alt="">
-                                    @else
-                                        @php
-                                            $tempPhoto = 'https://ui-avatars.com/api/?name=' . $user->name . '&size=128&background=EBF4FF&color=7F9CF5';
-                                        @endphp
-                                        <img class="w-10 h-10 rounded-full"
-                                            src="{{ $tempPhoto }}"
-                                            alt="">
-                                    @endif
-
-                                    <div class="ml-3">
-                                        <a href="{{ route('user-profile', [
-                                            'email' => $user->email,
-                                            'id' => \Crypt::encrypt($user->id),
-                                        ]) }}"
-                                            class="text-sm font-medium text-gray-900 underline">{{ $user->name }}</a>
-                                        <p class="text-sm text-gray-500">{{ $user->email }}</p>
-                                    </div>
-                                </li>
-                            @empty
-                                <li class="py-4">
-                                    <p class="text-sm text-gray-500">No users found</p>
-                                </li>
-                            @endforelse
-                        </ul>
-                    </div>
-                @endif
-            </div>
-            <div>
-                @if ($searchTerm != '')
-                    <div class="p-2">
-                        <div class="py-1">
                             <h1 class="text-lg text-gray-400">POSTS</h1>
                         </div>
                         <ul role="list"

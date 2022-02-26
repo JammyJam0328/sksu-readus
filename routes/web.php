@@ -61,6 +61,10 @@ Route::middleware(['auth:sanctum', 'verified','users'])->group(function () {
         return view('user-pages.search');
     })->name('search');
 
+    Route::get('/full-search',function(){
+        return view('user-pages.algolia-search');
+    })->name('algolia-search');
+
 });
 // admin routes
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','admin'])->group(function () {

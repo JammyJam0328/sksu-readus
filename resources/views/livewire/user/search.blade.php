@@ -1,5 +1,5 @@
 <div class="sticky top-0 z-50">
-    <div class="pt-2 pb-2 pl-4 pr-6 border-b sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-2 xl:border-t-0 bg-indigo-500 text-white">
+    <div class="pt-2 pb-2 pl-4 pr-6 text-white bg-indigo-500 border-b sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-2 xl:border-t-0">
         <div class="w-full">
             <div class="flex items-center justify-between space-x-2">
                 <div class="flex space-x-2">
@@ -9,7 +9,7 @@
                 </div>
                 <div class="flex items-center space-x-2">
                     <div>
-                        <a href="{{ route('search') }}"
+                        <a href="{{ route('algolia-search') }}"
                             class="mt-1 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="w-8 h-8 font-light md:font-bold "

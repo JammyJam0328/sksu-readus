@@ -68,7 +68,7 @@
             <div class="mt-2">
                 <h1 class="text-xl font-semibold text-center text-gray-500">Posts</h1>
             </div>
-            <livewire:user.stateful.post-list>
+            {{-- <livewire:user.stateful.post-list> --}}
         </main>
         <x-shared.image-viewer />
     </div>

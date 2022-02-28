@@ -1,3 +1,7 @@
+/config/broadcasting.php
+/config/websocket.php
+/config/scout.php
+/resources/js/bootstrap.js
 /node_modules
 /public/hot
 /public/storage

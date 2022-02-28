@@ -52,7 +52,7 @@
 @section('main')
     <div x-data="{formOpen:false}"
         x-on:create-post.window="formOpen=!formOpen">
-        <div x-cloak
+        {{-- <div x-cloak
             x-show="formOpen"
             x-collapse.duration.500ms>
             <div>
@@ -71,7 +71,7 @@
 
             <livewire:user.stateful.post-list>
         </main>
-        <x-shared.image-viewer />
+        <x-shared.image-viewer /> --}}
     </div>
 @endsection
 

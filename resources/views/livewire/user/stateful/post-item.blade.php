@@ -107,19 +107,7 @@
                   
               @endphp
               {!! $text !!}
-              @if ($trancated_post_body)
-                  @if ($see_more)
-                      <a wire:click.prevent="less"
-                          href="#{{ $post->title }}"
-                          class="text-sm italic font-medium text-indigo-500 underline">see less</a>
-                  @else
-                      <a wire:click.prevent="more"
-                          href="#{{ $post->title }}"
-                          class="text-sm italic font-medium text-indigo-500 underline">
-                          see more
-                      </a>
-                  @endif
-              @endif
+
               </pre>
               @if ($post->hasMedia)
                   <div class="py-1"
@@ -131,7 +119,6 @@
               @if ($post->created_at->diffInSeconds(Carbon\Carbon::now()) < 60)
                   Just now
               @else
-
                   {{ $post->created_at->diffForhumans() }}
               @endif
           </p>

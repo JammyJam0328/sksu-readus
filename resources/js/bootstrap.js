@@ -20,25 +20,25 @@ import Echo from "laravel-echo";
 
 window.Pusher = require("pusher-js");
 
-window.Echo = new Echo({
-    broadcaster: "pusher",
-    key: "readUsAppKey",
-    wsHost: window.location.hostname,
-    wsPort: 6001,
-    forceTLS: false,
-    disableStats: true,
-});
-
-// production;
-
 // window.Echo = new Echo({
 //     broadcaster: "pusher",
 //     key: "readUsAppKey",
-//     cluster: "mt1",
 //     wsHost: window.location.hostname,
 //     wsPort: 6001,
-//     wssHost: 6001,
+//     forceTLS: false,
 //     disableStats: true,
-//     forceTLS: true,
-//     enabledTransports: ["ws", "wss"],
 // });
+
+// production;
+
+window.Echo = new Echo({
+    broadcaster: "pusher",
+    key: "readUsAppKey",
+    cluster: "mt1",
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    wssHost: 6001,
+    disableStats: true,
+    forceTLS: true,
+    enabledTransports: ["ws", "wss"],
+});

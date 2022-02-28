@@ -6477,8 +6477,8 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 //     forceTLS: false,
 //     disableStats: true,
 // });
+// production;
 
-production;
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
   key: "readUsAppKey",

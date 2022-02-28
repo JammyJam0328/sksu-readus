@@ -58,7 +58,7 @@
             <div>
                 <livewire:user.process.create-post />
             </div>
-        </div>
+        </div> --}}
         <main>
             <div class="z-50 flex items-center justify-center ">
                 <div class="hidden w-full p-1 text-center text-indigo-500 bg-indigo-100">
@@ -68,10 +68,9 @@
             <div class="mt-2">
                 <h1 class="text-xl font-semibold text-center text-gray-500">Posts</h1>
             </div>
-
             <livewire:user.stateful.post-list>
         </main>
-        <x-shared.image-viewer /> --}}
+        <x-shared.image-viewer />
     </div>
 @endsection
 

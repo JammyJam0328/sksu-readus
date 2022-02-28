@@ -26,8 +26,8 @@ class PostItem extends Component
     public function mount()
     {
         $this->commentCount = $this->post->comments_count;
-        $this->post_body = str::limit($this->post->body, 500);
-        if (str::length($this->post->body) > 500) {
+        $this->post_body = Str::limit($this->post->body, 500);
+        if (Str::length($this->post->body) > 500) {
             $this->trancated_post_body = true;
         }
     }
@@ -38,7 +38,7 @@ class PostItem extends Component
     }
     public function less()
     {
-        $this->post_body = str::limit($this->post->body, 500);
+        $this->post_body = Str::limit($this->post->body, 500);
         $this->see_more=false;
     }
 

@@ -1,7 +1,8 @@
 <div>
     <div class="flex-1 p-3 space-y-4 ">
         <div>
-            <form class="relative pt-2 mx-auto text-gray-600">
+            <form wire:submit.prevent="search"
+                class="relative pt-2 mx-auto text-gray-600">
                 @csrf
                 <div>
                     <input wire:model.debounce.500ms="searchTerm"
@@ -11,7 +12,7 @@
                         placeholder="Search"
                         autocomplete="search"
                         placeholder="Search">
-                    <button type="button"
+                    <button type="submit"
                         class="absolute top-0 right-0 mt-5 mr-4">
                         <svg class="w-4 h-4 text-gray-400 fill-current"
                             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +42,7 @@
                     </div>
                     <ul role="list"
                         class="divide-y divide-gray-200">
-                        @forelse ($postResults as $key => $post)
+                        @forelse ($posts as $key => $post)
                             <li wire:key="{{ $key }}-post-{{ $key }}"
                                 class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
                                 <div class="flex justify-between space-x-3">
@@ -60,7 +61,11 @@
                                 </div>
                                 <div class="mt-1">
                                     <p class="text-sm text-gray-600 line-clamp-2">
-                                        {{ \Illuminate\Support\Str::limit($post->body, 100) }}
+                                        @php
+                                            // show only 12 characters
+                                            $post_content = substr($post->body, 0, 12);
+                                        @endphp
+                                        {{ $post_content }}
                                     </p>
                                 </div>
                             </li>
@@ -71,6 +76,46 @@
                         @endforelse
                     </ul>
                 </div>
+                {{-- <div class="p-2">
+                    <div class="py-1">
+                        <h1 class="text-lg text-gray-400">Users</h1>
+                    </div>
+                    <ul role="list"
+                        class="divide-y divide-gray-200">
+                        @forelse ($users as $key => $user)
+                            <li wire:key="{{ $key }}-post-{{ $key }}"
+                                class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                                <div class="flex justify-between space-x-3">
+                                    <div class="flex-1 min-w-0">
+                                        <a href="{{ route('view-post', [
+                                            'post_id' => \Crypt::encrypt($post->id),
+                                        ]) }}"
+                                            class="block focus:outline-none">
+                                            <span class="absolute inset-0"
+                                                aria-hidden="true"></span>
+                                            <p class="text-sm font-medium text-gray-900 underline truncate">
+                                                {{ $post->title }}
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="mt-1">
+                                    <p class="text-sm text-gray-600 line-clamp-2">
+                                        @php
+                                            // show only 12 characters
+                                            $post_content = substr($post->body, 0, 12);
+                                        @endphp
+                                        {{ $post_content }}
+                                    </p>
+                                </div>
+                            </li>
+                        @empty
+                            <li class="py-4">
+                                <p class="text-sm text-gray-500">No posts found</p>
+                            </li>
+                        @endforelse
+                    </ul>
+                </div> --}}
             @endif
         </div>
         <div wire:loading.flex

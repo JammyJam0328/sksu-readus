@@ -8,10 +8,21 @@ use App\Models\Post;
 class SearchPage extends Component
 {
     public $searchTerm='';
+    public $posts = [];
+    public $users = [];
     public function render()
     {
-        return view('livewire.user.search-page',[
-            'postResults'=>Post::search($this->searchTerm)->get(),
-        ]);
+        return view('livewire.user.search-page');
+    }
+
+    public function search()
+    {
+        if ($this->searchTerm!='') {
+            $this->users = User::search($this->searchTerm)->get();
+            $this->posts = Post::search($this->searchTerm)->get();
+        }else{
+            $this->users=[];
+            $this->posts=[];
+        }
     }
 }

@@ -18,7 +18,7 @@ class Search extends Component
         return view('livewire.user.search');
     }
 
-    public function updatedSearchTerm()
+    public function search()
     {
       if ($this->searchTerm!='') {
         $this->users = User::search($this->searchTerm)->get();

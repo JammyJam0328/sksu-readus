@@ -52,13 +52,13 @@
 @section('main')
     <div x-data="{formOpen:false}"
         x-on:create-post.window="formOpen=!formOpen">
-        {{-- <div x-cloak
+        <div x-cloak
             x-show="formOpen"
             x-collapse.duration.500ms>
             <div>
                 <livewire:user.process.create-post />
             </div>
-        </div> --}}
+        </div>
         <main>
             <div class="z-50 flex items-center justify-center ">
                 <div class="hidden w-full p-1 text-center text-indigo-500 bg-indigo-100">

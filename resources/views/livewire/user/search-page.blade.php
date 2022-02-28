@@ -5,7 +5,7 @@
                 class="relative pt-2 mx-auto text-gray-600">
                 @csrf
                 <div>
-                    <input wire:model.debounce.500ms="searchTerm"
+                    <input wire:model.defer="searchTerm"
                         class="w-full h-10 px-5 pr-16 text-sm bg-gray-100 border-0 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-100"
                         type="search"
                         name="search"
@@ -38,6 +38,36 @@
             @if ($searchTerm != '')
                 <div class="p-2">
                     <div class="py-1">
+                        <h1 class="text-lg text-gray-400">Users</h1>
+                    </div>
+                    <ul role="list"
+                        class="divide-y divide-gray-200">
+                        @forelse ($users as $user)
+                            <li class="flex py-4">
+                                @if ($user->google_id)
+                                    <img class="w-10 h-10 rounded-full"
+                                        src="{{ $user->profile_photo_path != null ? $user->profile_photo_url : $user->google_profile_photo }}"
+                                        alt="">
+                                @else
+                                    <img class="w-10 h-10 rounded-full"
+                                        src="{{ $user->profile_photo_url }}"
+                                        alt="">
+                                @endif
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">{{ $user->name }}</p>
+                                    <p class="text-sm text-gray-500">{{ $user->email }}</p>
+                                </div>
+                            </li>
+                        @empty
+                            <li class="py-4">
+                                <p class="text-sm text-gray-500">No User found</p>
+                            </li>
+                        @endforelse
+                    </ul>
+
+                </div>
+                <div class="p-2">
+                    <div class="py-1">
                         <h1 class="text-lg text-gray-400">POSTS</h1>
                     </div>
                     <ul role="list"
@@ -63,9 +93,9 @@
                                     <p class="text-sm text-gray-600 line-clamp-2">
                                         @php
                                             // show only 12 characters
-                                            $post_content = substr($post->body, 0, 12);
+                                            $post_content = substr($post->body, 0, 100);
                                         @endphp
-                                        {{ $post_content }}
+                                        {{ $post_content }} {{ strlen($post->body) > 100 ? '...' : '' }}
                                     </p>
                                 </div>
                             </li>
@@ -76,46 +106,7 @@
                         @endforelse
                     </ul>
                 </div>
-                {{-- <div class="p-2">
-                    <div class="py-1">
-                        <h1 class="text-lg text-gray-400">Users</h1>
-                    </div>
-                    <ul role="list"
-                        class="divide-y divide-gray-200">
-                        @forelse ($users as $key => $user)
-                            <li wire:key="{{ $key }}-post-{{ $key }}"
-                                class="relative px-2 py-3 bg-white focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                <div class="flex justify-between space-x-3">
-                                    <div class="flex-1 min-w-0">
-                                        <a href="{{ route('view-post', [
-                                            'post_id' => \Crypt::encrypt($post->id),
-                                        ]) }}"
-                                            class="block focus:outline-none">
-                                            <span class="absolute inset-0"
-                                                aria-hidden="true"></span>
-                                            <p class="text-sm font-medium text-gray-900 underline truncate">
-                                                {{ $post->title }}
-                                            </p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="mt-1">
-                                    <p class="text-sm text-gray-600 line-clamp-2">
-                                        @php
-                                            // show only 12 characters
-                                            $post_content = substr($post->body, 0, 12);
-                                        @endphp
-                                        {{ $post_content }}
-                                    </p>
-                                </div>
-                            </li>
-                        @empty
-                            <li class="py-4">
-                                <p class="text-sm text-gray-500">No posts found</p>
-                            </li>
-                        @endforelse
-                    </ul>
-                </div> --}}
+
             @endif
         </div>
         <div wire:loading.flex

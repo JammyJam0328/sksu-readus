@@ -29,7 +29,7 @@ window.Pusher = require("pusher-js");
 //     disableStats: true,
 // });
 
-// production
+production;
 window.Echo = new Echo({
     broadcaster: "pusher",
     key: "readUsAppKey",

@@ -10,7 +10,6 @@
                     @if ($post->user->google_id)
                         <img class="rounded-full h-11 w-11"
                             src="{{ $post->user->profile_photo_path == '' ? $post->user->google_profile_photo : $post->user->profile_photo_url }}" />
-
                     @else
                         <img class="rounded-full h-11 w-11"
                             src="{{ $post->user->profile_photo_url }}" />
@@ -55,7 +54,7 @@
                         x-transition:leave="transition ease-in duration-75"
                         x-transition:leave-start="opacity-100 scale-100"
                         x-transition:leave-end="opacity-0 scale-95"
-                        class="absolute z-30 right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        class="absolute right-0 z-30 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                         role="menu"
                         aria-orientation="vertical"
                         aria-labelledby="menu-button"
@@ -82,13 +81,13 @@
                                 role="menuitem"
                                 tabindex="-1"
                                 id="menu-item-2">Report</a>
-
                         </div>
                     </div>
                 </div>
             </div>
             <p wire:key="{{ $post->id }}-{{ $post->title }}"
                 class="block text-xl leading-snug text-black break-words whitespace-pre-line ">
+                <span class="font-bold">{{ $post->title }}</span>
                 @php
                     $text = html_entity_decode($post->body);
                     $text = ' ' . $text;
@@ -98,12 +97,11 @@
                     $text = preg_replace("/(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+)+)/i", "$1<a class=\"text-blue-600 underline \" target=\"_black\" href=\"mailto:$2@$3\">$2@$3</a>", $text);
                     $text = preg_replace("/(^|[\n ])(mailto:[a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+)+)/i", "$1<a class=\"text-blue-600 underline \" target=\"_black\" href=\"$2@$3\">$2@$3</a>", $text);
                     $text = preg_replace("/(^|[\n ])(skype:[^ \,\"\t\n\r<]*)/i", "$1<a class=\"text-blue-600 underline \" target=\"_black\" href=\"$2\">$2</a>", $text);
-                    
                 @endphp
                 {!! $text !!}
             </p>
             @if ($post->hasMedia)
-                <div class="py-1 z-20"
+                <div class="z-20 py-1"
                     x-id="['media-container']">
                     <livewire:user.media-container :medias="$post->medias" />
                 </div>
@@ -273,7 +271,6 @@
                                 @if ($post->user->google_id)
                                     <img class="rounded-full h-11 w-11"
                                         src="{{ $post->user->profile_photo_path == '' ? $post->user->google_profile_photo : $post->user->profile_photo_url }}" />
-
                                 @else
                                     <img class="rounded-full h-11 w-11"
                                         src="{{ $post->user->profile_photo_url }}" />
@@ -381,14 +378,14 @@
                         @endforeach
                     </div>
                     <div class="container grid grid-cols-3 gap-2 mx-auto my-2">
-                        @foreach ($post->medias->where('type', 'video') as $key => $video)
+                        @foreach ($post->medias->where('type', 'video') as $key => $media)
                             <div wire:key="video-{{ $key }}"
                                 class="relative">
                                 <div class="w-full h-full rounded">
                                     <video class="h-full"
                                         controls>
                                         <source
-                                            src="https://drive.google.com/uc?export=view&id={{ $video->file_id }}"
+                                            src="https://drive.google.com/uc?export=view&id={{ $media->file_id }}"
                                             type="video/mp4">
                                     </video>
                                 </div>

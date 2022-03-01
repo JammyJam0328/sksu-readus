@@ -3,31 +3,32 @@
         @if ($images)
             <div x-data="{images:@js($images), currentImage:0}"
                 x-id="['image-gallery']"
-                class="container mx-auto relative flex  items-center w-full">
+                class="container relative flex items-center w-full mx-auto">
                 <div x-on:mouseover="scroll=true"
                     x-on:mouseleave="scroll=false"
-                    class="p-2  bg-gradient-to-tr from-indigo-700 to-red-400 lg:space-y-0 w-full rounded-xl "
+                    class="w-full p-2 bg-gradient-to-tr from-indigo-700 to-red-400 lg:space-y-0 rounded-xl "
                     x-on:dblclick="$dispatch('view-image',images)">
                     <template x-for="(image,index) in images"
                         :key="index">
                         <div x-cloak
                             x-show="index==currentImage"
-                            class="w-full rounded h-64 md:h-96">
+                            class="w-full h-64 rounded md:h-96">
                             <img x-bind:src="'https://drive.google.com/uc?export=view&id='+image.file_id"
-                                class="h-full w-full object-contain"
+                                class="object-contain w-full h-full"
                                 x-bind:alt="'image-' +image.file_id">
                         </div>
                     </template>
                 </div>
-                <div class="absolute right-2 top-2 px-1 rounded opacity-70 bg-gray-700 text-white">
+                <div class="absolute px-1 text-white bg-gray-700 rounded right-2 top-2 opacity-70">
                     <span x-text="currentImage+1 + ' / ' + images.length"></span>
                 </div>
                 <div x-show="images.length>1 "
-                    class="absolute left-3 align-middle my-auto">
-                    <button x-on:click.prevent="currentImage>0? currentImage--:''"
-                        class="inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 opacity-50">
+                    class="absolute my-auto align-middle left-3">
+                    <button type="button"
+                        x-on:click.prevent="currentImage>0? currentImage--:''"
+                        class="inline-flex items-center p-1 text-white bg-gray-600 border border-transparent rounded-full shadow-sm opacity-50 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-6 w-6"
+                            class="w-6 h-6"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -39,11 +40,12 @@
                     </button>
                 </div>
                 <div x-show="images.length>1"
-                    class="absolute right-3 align-middle my-auto">
-                    <button x-on:click.prevent="currentImage==images.length-1?currentImage=0:currentImage++"
-                        class="inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 opacity-50">
+                    class="absolute my-auto align-middle right-3">
+                    <button type="button"
+                        x-on:click.prevent="currentImage==images.length-1?currentImage=0:currentImage++"
+                        class="inline-flex items-center p-1 text-white bg-gray-600 border border-transparent rounded-full shadow-sm opacity-50 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-6 w-6"
+                            class="w-6 h-6"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -62,12 +64,12 @@
             <div x-data="{videos:@js($videos),current:0,playing:''}"
                 class="container mx-auto">
                 <div x-bind:class="videos.length >=4 ? 'grid-cols-4' :  'grid-cols-'+videos.length"
-                    class=" p-2  lg:space-y-0 grid bg-gradient-to-tr from-indigo-700 to-red-400">
+                    class="grid p-2 lg:space-y-0 bg-gradient-to-tr from-indigo-700 to-red-400">
                     <template x-for="(video,index) in videos"
                         :key="index">
                         <div x-cloak
                             x-show="current==index"
-                            class="w-full rounded h-full">
+                            class="w-full h-full rounded">
                             {{-- <img x-bind:src="'https://drive.google.com/uc?export=view&id='+image.file_id"
                                     class="h-full"
                                     alt="image"> --}}
@@ -76,7 +78,7 @@
                                 x-intersect:leave="playing==video.file_id ? $el.pause() : ''"
                                 x-on:ended="playing=''"
                                 x-bind:id="'video-'+index+'-'+video.id"
-                                class="h-full object-cover"
+                                class="object-cover h-full"
                                 controls>
                                 <source x-bind:src="'https://drive.google.com/uc?export=view&id='+video.file_id"
                                     type="video/mp4">
@@ -90,12 +92,12 @@
                 </div>
                 <div class="w-full p-2">
                     <template x-if="videos.length > 1">
-                        <div class="flex space-x-2 justify-end">
+                        <div class="flex justify-end space-x-2">
                             <button x-on:click="current--"
                                 x-bind:disabled="current==0"
-                                class="text-gray-400 text-sm">
+                                class="text-sm text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5"
+                                    class="w-5 h-5"
                                     viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
@@ -103,12 +105,12 @@
                                         clip-rule="evenodd" />
                                 </svg>
                             </button>
-                            <span class="text-gray-400 text-sm"
+                            <span class="text-sm text-gray-400"
                                 x-text="current + 1 + ' of ' + videos.length "></span>
 
                             <button x-on:click.prevent="current + 1 == videos.length ? current=0 : current ++"
-                                class="text-gray-400 text-sm"><svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5"
+                                class="text-sm text-gray-400"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="w-5 h-5"
                                     viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
@@ -127,17 +129,17 @@
     <div>
         @if ($documents)
             <dd
-                class="mt-2 text-sm text-gray-900 sm:mt-0 sm:col-span-2 p-2 bg-gradient-to-tr from-indigo-700 to-red-400">
+                class="p-2 mt-2 text-sm text-gray-900 sm:mt-0 sm:col-span-2 bg-gradient-to-tr from-indigo-700 to-red-400">
                 <ul role="list"
-                    class="border border-gray-200  divide-y divide-gray-200 bg-white">
+                    class="bg-white border border-gray-200 divide-y divide-gray-200">
                     @foreach ($documents as $key => $document)
                         <li wire:key="{{ $key }}-{{ $document->file_id }}"
-                            class="px-2 py-1 flex items-center justify-between text-sm">
+                            class="flex items-center justify-between px-2 py-1 text-sm">
                             <a href="https://drive.google.com/file/d/{{ $document->file_id }}"
                                 target="_blank"
-                                class="w-0 flex-1 flex items-center">
+                                class="flex items-center flex-1 w-0">
                                 <!-- Heroicon name: solid/paper-clip -->
-                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400"
+                                <svg class="flex-shrink-0 w-5 h-5 text-gray-400"
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
@@ -146,7 +148,7 @@
                                         d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 flex-1 w-0 truncate underline text-indigo-500">
+                                <span class="flex-1 w-0 ml-2 text-indigo-500 underline truncate">
                                     https://drive.google.com/file/d/{{ $document->file_id }}
                                 </span>
                             </a>

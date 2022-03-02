@@ -61,6 +61,11 @@ Route::middleware(['auth:sanctum', 'verified','users'])->group(function () {
         return view('user-pages.search');
     })->name('search');
 
+        
+    Route::get('/report-content/{id}',function(){
+        return view('user-pages.report-content');
+    })->name('report-content');
+
 
 });
 // admin routes

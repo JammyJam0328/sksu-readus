@@ -9,14 +9,19 @@ use App\Models\Campus;
 use App\Models\Department;
 use App\Models\Program;
 
+// use livewire/upload-file
+use Livewire\WithFileUploads;
+
 class UserProfile extends Component
 {
+    use WithFileUploads;
     public $userid;
     public $user_information;
     public $courses = [];
     public $departments = [];
     public $campuses = [];
 
+    public $new_profile_photo;
     public function render()
     {
         return view('livewire.user.stateful.user-profile',[
@@ -111,6 +116,24 @@ class UserProfile extends Component
         ]);
     }
 
+
+    public function updatedNewProfilePhoto()
+    {
+        $this->validate([
+            'new_profile_photo' => 'required|image|mimes:jpeg,png|max:2048',
+        ]);
+
+        $this->new_profile_photo->store('profile-photos', 'public');
+
+        auth()->user()->update([
+            'profile_photo_path' =>'profile-photos/'.$this->new_profile_photo->hashName()
+        ]);
+        
+        $this->dispatchBrowserEvent('notify',[
+            'type'=>'success',
+            'message'=>'Profile photo updated successfully',
+        ]);
+    }
    
 }
 

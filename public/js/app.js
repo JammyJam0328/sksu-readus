@@ -6469,26 +6469,27 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
  */
 
 
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js"); // window.Echo = new Echo({
+//     broadcaster: "pusher",
+//     key: "readUsAppKey",
+//     wsHost: window.location.hostname,
+//     wsPort: 6001,
+//     forceTLS: false,
+//     disableStats: true,
+// });
+// production;
+
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
   key: "readUsAppKey",
+  cluster: "mt1",
   wsHost: window.location.hostname,
   wsPort: 6001,
-  forceTLS: false,
-  disableStats: true
-}); // production;
-// window.Echo = new Echo({
-//     broadcaster: "pusher",
-//     key: "readUsAppKey",
-//     cluster: "mt1",
-//     wsHost: window.location.hostname,
-//     wsPort: 6001,
-//     wssHost: 6001,
-//     disableStats: true,
-//     forceTLS: true,
-//     enabledTransports: ["ws", "wss"],
-// });
+  wssHost: 6001,
+  disableStats: true,
+  forceTLS: true,
+  enabledTransports: ["ws", "wss"]
+});
 
 /***/ }),
 

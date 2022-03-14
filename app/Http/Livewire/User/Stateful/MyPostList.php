@@ -13,7 +13,7 @@ class MyPostList extends Component
     public function render()
     {
         return view('livewire.user.stateful.my-post-list',[
-            'posts' => $this->ready ? Post::where('user_id',$this->userid)->with(['user'=>function($query){
+            'posts' => $this->ready ? Post::where('user_id',$this->userid)->where('blocked',0)->with(['user'=>function($query){
                 return $query->select('id','name','profile_photo_path');
             },'medias'=>function($query){
                 return $query->select('id','post_id','type','file_id');

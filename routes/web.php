@@ -62,9 +62,7 @@ Route::middleware(['auth:sanctum', 'verified','users'])->group(function () {
     })->name('search');
 
         
-    Route::get('/report-content/{id}',function(){
-        return view('user-pages.report-content');
-    })->name('report-content');
+    Route::get('/report-content/{id}',[UserController::class,'reportcontent'])->name('report-content');
 
 
 });
@@ -88,5 +86,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','admin'])->group(
     Route::get('/school',function(){
         return view('admin-pages.school');
     })->name('admin-school');
+
+    Route::get('/reported-post',function(){
+        return view('admin-pages.reported-post');
+    })->name('admin-reported-post');
     
 });

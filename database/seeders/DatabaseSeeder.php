@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CampusDepartmentProgramSeeder::class);
         $this->call(InitialAccountSeeder::class);
         $this->call(PrivacySeeder::class);
+        $this->call(ReasonSeeder::class);
     }
 }

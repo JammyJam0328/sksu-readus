@@ -13,14 +13,14 @@ class PostList extends Component
 
     protected function getAllPosts()
     {
-        return  Post::where('visibility','all')->orWhere('visibility',auth()->user()->campus_id)->with(['user','medias'=>function($query){
+        return  Post::where('blocked',0)->where('visibility','all')->orWhere('visibility',auth()->user()->campus_id)->with(['user','medias'=>function($query){
                 return $query->select('id','post_id','type','file_id');
             }])->withCount('comments')->latest()->take($this->limit)->get();
     }
 
     protected function getCampusPosts()
     {
-        return Post::where('visibility',auth()->user()->campus_id)->with(['user','medias'=>function($query){
+        return Post::where('blocked',0)->where('visibility',auth()->user()->campus_id)->with(['user','medias'=>function($query){
                 return $query->select('id','post_id','type','file_id');
             }])->withCount('comments')->latest()->take($this->limit)->get();
     }

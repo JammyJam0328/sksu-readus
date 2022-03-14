@@ -32,6 +32,7 @@
 @endsection
 @section('main')
     <div>
-        Report
+
+        <livewire:user.report-content :id="$id" />
     </div>
 @endsection

@@ -123,7 +123,7 @@
                         </svg>
                     </a>
 
-                    <a href="#"
+                    <a href="{{ route('admin-reported-post') }}"
                         class="inline-flex items-center justify-center flex-shrink-0 text-gray-400 rounded-lg hover:bg-gray-700 h-14 w-14 hover:text-white">
                         <span class="sr-only">Reported Post</span>
                         <svg xmlns="http://www.w3.org/2000/svg"

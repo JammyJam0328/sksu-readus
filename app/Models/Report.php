@@ -18,4 +18,9 @@ class Report extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function reason()
+    {
+        return $this->belongsTo(Reason::class);
+    }
 }

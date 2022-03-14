@@ -81,4 +81,23 @@ class UserController extends Controller
         ]);
     }
 
+    public function reportcontent(Request $request)
+    {
+        $id = $request->id;
+        // check if post exists
+        $post = Post::where('id',$id)->first();
+        if ($post==null) {
+           abort(404);
+        }
+        // check of post privacy_id = 1
+        if ($post->privacy_id!=1) {
+            // check if post visibility = user campus id
+            if ($post->visibility!=auth()->user()->campus_id) {
+                abort(404);
+            }
+        }
+        return view('user-pages.report-content',[
+            'id'=>$id
+        ]);
+    }
 }

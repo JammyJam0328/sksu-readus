@@ -15,26 +15,35 @@
                                 <path
                                     d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
                             </svg>
+                            <div class="flex-1 space-y-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-sm font-bold underline">{{ $notification->data['commentator_name'] }}</h3>
+                                    <p class="text-sm text-gray-500">{{ $notification->created_at->diffForhumans() }}</p>
+                                </div>
+                                <p class="text-sm text-gray-500">{{ $notification->data['message'] }}</p>
+                            </div>
                         @break
+
                         @case('author_comment')
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 text-indigo-600"
+                                class="w-5 h-5 text-indigo-600"
                                 viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
                                     clip-rule="evenodd" />
                             </svg>
+                            <div class="flex-1 space-y-1">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-sm font-bold underline">{{ $notification->data['commentator_name'] }}</h3>
+                                    <p class="text-sm text-gray-500">{{ $notification->created_at->diffForhumans() }}</p>
+                                </div>
+                                <p class="text-sm text-gray-500">{{ $notification->data['message'] }}</p>
+                            </div>
                         @break
+
                         @default
                     @endswitch
-                    <div class="flex-1 space-y-1">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-sm font-bold underline">{{ $notification->data['commentator_name'] }}</h3>
-                            <p class="text-sm text-gray-500">{{ $notification->created_at->diffForhumans() }}</p>
-                        </div>
-                        <p class="text-sm text-gray-500">{{ $notification->data['message'] }}</p>
-                    </div>
                 </div>
             </li>
         @endforeach

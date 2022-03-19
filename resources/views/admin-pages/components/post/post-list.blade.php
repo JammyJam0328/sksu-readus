@@ -59,7 +59,6 @@
                                 <button x-on:click="mediaOpen=!mediaOpen"
                                     class="flex items-center justify-center w-full pt-2 text-gray-400"
                                     x-text="mediaOpen ? 'Hide' : ' See attached media'">
-
                                 </button>
                             </div>
                             <div x-cloak
@@ -72,6 +71,13 @@
                         </div>
                     @endif
                 </article>
+                <div class="my-2">
+                    <button wire:click="deleteConfirmation({{ $post->id }})"
+                        type="button"
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        Delete
+                    </button>
+                </div>
             </li>
 
         @empty

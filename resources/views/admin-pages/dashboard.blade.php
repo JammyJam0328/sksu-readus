@@ -4,6 +4,21 @@
     <x-admin.page title="Dashboard">
         <x-slot name="main">
             <livewire:admin.dashboard-details />
+            <div class="mt-5 space-y-3">
+                <h1 class="text-xl font-semibold text-gray-700">GENERATE REPORT</h1>
+                <div class="flex space-x-2">
+                    <a href="{{ route('report-post-per-campus') }}"
+                        type="button"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        <span class="mr-2">Total post per campus</span>
+                    </a>
+                    <a href="{{ route('report-post-per-day-months') }}"
+                        type="button"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        <span class="mr-2">Total post per day and Months</span>
+                    </a>
+                </div>
+            </div>
         </x-slot>
     </x-admin.page>
     {{-- <div class="mt-2 space-y-2">

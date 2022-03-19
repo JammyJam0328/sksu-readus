@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\ReportController;
 
 
 
@@ -90,5 +91,14 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','admin'])->group(
     Route::get('/reported-post',function(){
         return view('admin-pages.reported-post');
     })->name('admin-reported-post');
-    
+
+    Route::get('/report/post-per-campus',\App\Http\Livewire\Admin\GenerateReport::class)->name('report-post-per-campus');
+     Route::get('/report/post-per-day-months',\App\Http\Livewire\Admin\GenerateReportPerDay::class)->name('report-post-per-day-months');
+
+    //  version 2
+    Route::get('/v2/dashboard',\App\Http\Livewire\VersionTwo\Admin\Dashboard::class)->name('vtwo-admin-dashboard');
+    Route::get('/v2/users',\App\Http\Livewire\VersionTwo\Admin\ManageUsers::class)->name('vtwo-admin-users');
+    Route::get('/v2/posts',\App\Http\Livewire\VersionTwo\Admin\ManagePosts::class)->name('vtwo-admin-posts');
+    Route::get('/v2/announcements',\App\Http\Livewire\VersionTwo\Admin\ManageAnnouncements::class)->name('vtwo-admin-announcements');
+    Route::get('/v2/events',\App\Http\Livewire\VersionTwo\Admin\ManageEvents::class)->name('vtwo-admin-events');
 });

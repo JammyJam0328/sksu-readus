@@ -1,8 +1,247 @@
 <div x-data="{action:''}"
     x-on:start-deleting.window="action='delete-confirmation'"
-    x-on:notify.window="action = event.detail.nextAction">
+    x-on:notify.window="action = event.detail.nextAction"
+    x-on:start-editing.window="action = 'edit'">
     <div x-show="action==''">
         @include('admin-pages.components.event.event-list')
+    </div>
+    <div x-cloak
+        x-show="action=='create'">
+        <div>
+            <form>
+                <div class="space-y-8 divide-y divide-gray-200">
+                    <div>
+                        <div>
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Create Event</h3>
+                        </div>
+                        <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                <label for="title"
+                                    class="block text-sm font-medium text-gray-700"> Title </label>
+                                <div class="mt-1">
+                                    <input type="text"
+                                        wire:model.defer="title"
+                                        name="title"
+                                        id="title"
+                                        autocomplete="title"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @error('title')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <label for="description"
+                                    class="block text-sm font-medium text-gray-700"> Description </label>
+                                <div class="mt-1">
+                                    <textarea rows="4"
+                                        wire:model.defer="description"
+                                        name="description"
+                                        id="description"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                                    @error('description')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="date_start"
+                                    class="block text-sm font-medium text-gray-700"> Starting Date </label>
+                                <div class="mt-1">
+                                    <input type="datetime-local"
+                                        wire:model.defer="start_date"
+                                        name="date_start"
+                                        id="date_start"
+                                        autocomplete="date_start"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @error('start_date')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="end_date"
+                                    class="block text-sm font-medium text-gray-700"> End Date </label>
+                                <div class="mt-1">
+                                    <input type="datetime-local"
+                                        wire:model.defer="end_date"
+                                        name="end_date"
+                                        id="end_date"
+                                        autocomplete="end_date"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @error('end_date')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="publicity"
+                                    class="block text-sm font-medium text-gray-700"> Publicity </label>
+                                <div class="mt-1">
+                                    <select id="publicity"
+                                        wire:model.defer="publicity"
+                                        name="publicity"
+                                        autocomplete="publicity"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="All">All</option>
+                                        @foreach ($publicities as $publicity)
+                                            <option value="{{ $publicity->id }}">{{ $publicity->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('publicity')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="pt-5">
+                    <div class="flex justify-end">
+                        <button x-on:click="action=''"
+                            type="button"
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                        <button wire:click.prevent="createEvent"
+                            type="button"
+                            class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div x-cloak
+        x-show="action=='edit'">
+        <div>
+            <form>
+                <div class="space-y-8 divide-y divide-gray-200">
+                    <div>
+                        <div>
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Update Event</h3>
+                        </div>
+                        <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                <label for="title"
+                                    class="block text-sm font-medium text-gray-700"> Title </label>
+                                <div class="mt-1">
+                                    <input type="text"
+                                        wire:model.defer="new_title"
+                                        name="title"
+                                        id="title"
+                                        autocomplete="title"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @error('new_title')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-6">
+                                <label for="description"
+                                    class="block text-sm font-medium text-gray-700"> Description </label>
+                                <div class="mt-1">
+                                    <textarea rows="4"
+                                        wire:model.defer="new_description"
+                                        name="description"
+                                        id="description"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                                    @error('new_description')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="date_start"
+                                    class="block text-sm font-medium text-gray-700"> Starting Date </label>
+                                <div class="mt-1">
+                                    <input type="datetime-local"
+                                        wire:model.defer="new_start_date"
+                                        name="date_start"
+                                        id="date_start"
+                                        autocomplete="date_start"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @error('new_start_date')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="end_date"
+                                    class="block text-sm font-medium text-gray-700"> End Date </label>
+                                <div class="mt-1">
+                                    <input type="datetime-local"
+                                        wire:model.defer="new_end_date"
+                                        name="end_date"
+                                        id="end_date"
+                                        autocomplete="end_date"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @error('new_end_date')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="publicity"
+                                    class="block text-sm font-medium text-gray-700"> Publicity </label>
+                                <div class="mt-1">
+                                    <select id="publicity"
+                                        wire:model.defer="new_publicity"
+                                        name="publicity"
+                                        autocomplete="publicity"
+                                        class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="All">All</option>
+                                        @foreach ($publicities as $publicity)
+                                            <option value="{{ $publicity->id }}">{{ $publicity->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('new_publicity')
+                                        <p class="text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="pt-5">
+                    <div class="flex justify-end">
+                        <button x-on:click="action=''"
+                            type="button"
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                        <button wire:click.prevent="update"
+                            type="button"
+                            class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
     <div x-cloak
         x-show="action=='delete-confirmation'"
@@ -33,7 +272,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <h2 class="py-4 text-xl font-bold ">Are you sure?</h3>
-                        <p class="px-8 text-sm text-gray-500">Do you really want to delete this account?
+                        <p class="px-8 text-sm text-gray-500">Do you really want to delete this event?
                             This process cannot be undone</p>
                 </div>
                 <!--footer-->
@@ -48,6 +287,4 @@
             </div>
         </div>
     </div>
-
-
 </div>

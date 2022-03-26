@@ -30,7 +30,7 @@
         defer></script>
 </head>
 
-<body x-data="{mobileNav:false}"
+<body x-data="{ mobileNav: false }"
     class="h-full overflow-hidden text-gray-700 font-poppins">
     <div class="flex flex-col h-full">
         <div class="flex flex-1 min-h-0 overflow-hidden ">
@@ -215,6 +215,34 @@
 
     @livewireScripts()
     @stack('livewireScripts')
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        function askNotificationPermision() {
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission();
+            }
+        }
+
+        function fireNotification() {
+            new Notification('SKSU ReadUs', {
+                icon: '{{ asset('images/ReadUsLogo128.png') }}',
+                body: 'You have a new notification',
+            });
+        }
+        window.addEventListener('DOMContentLoaded', askNotificationPermision);
+        window.livewire.on('new-notification', function() {
+            fireNotification();
+        });
+        try {
+            if (!navigator.serviceWorker.controller) {
+                navigator.serviceWorker.register("/sw.js").then(function(reg) {
+                    console.log("Service worker has been registered for scope: " + reg.scope);
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    </script>
 </body>
 
 </html>

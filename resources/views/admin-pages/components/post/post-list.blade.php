@@ -1,7 +1,7 @@
 <div>
     <ul role="list"
         class="space-y-4">
-        @forelse ($posts as $post)
+        @forelse ($posts as $key=>$post)
             <li class="px-4 py-6 bg-white sm:p-6 sm:rounded-lg">
                 <article aria-labelledby="question-title-81614">
                     <div>
@@ -53,7 +53,7 @@
                     </pre>
                     </div>
                     @if ($post->hasMedia)
-                        <div x-data="{mediaOpen:false}"
+                        <div x-data="{ mediaOpen: false }"
                             class="w-full mb-3 ">
                             <div class="w-fill">
                                 <button x-on:click="mediaOpen=!mediaOpen"
@@ -72,7 +72,8 @@
                     @endif
                 </article>
                 <div class="my-2">
-                    <button wire:click="deleteConfirmation({{ $post->id }})"
+                    <button wire:key="{{ $key }}-{{ $post->id }}-delete-button"
+                        wire:click="deleteConfirmation({{ $post->id }})"
                         type="button"
                         class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                         Delete

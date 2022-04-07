@@ -65,7 +65,8 @@
                                 x-show="mediaOpen"
                                 x-collapse>
                                 <div>
-                                    <livewire:user.media-container :medias="$post->medias" />
+                                    <livewire:user.media-container :key="$key.'-media-container'"
+                                        :medias="$post->medias" />
                                 </div>
                             </div>
                         </div>

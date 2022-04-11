@@ -12,6 +12,7 @@ class ReportContent extends Component
     public $selectedReason=0;
     public $postId;
     public $other =false;
+    public $specific_reason;
     public function mount($id)
     {
         $this->reasons=Reason::all();

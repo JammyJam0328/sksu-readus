@@ -11,7 +11,7 @@
             <fieldset>
                 <div class="mt-4 space-y-2">
                     @foreach ($reasons as $reason)
-                        <div wire:click.prevent="select({{ $reason->id }})"
+                        <div wire:click.prevent="select('{{ $reason->id }}')"
                             class="relative flex items-start px-2 py-4 border rounded-md hover:bg-gray-100 focus:bg-gray-100">
                             <div class="flex-1 min-w-0 text-sm">
                                 <label for="side-null"
